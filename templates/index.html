@@ -15,17 +15,9 @@
     <!-- Navigation Bar (Header)-->
     <nav class="navbar bg-body-tertiary bg-dark">
       <div class="container-fluid">
-        <div class = "d-flex">
-          <a class="navbar-brand me-2">One Stop Shop</a>
-          <a class="navbar-brand me-2" style = "color: white">Home</a>
-        </div>
         <div class="d-flex">
-            <button class="btn btn-outline-success me-1" data-bs-toggle = "modal" data-bs-target = "#register_owner">Register as Owner</button>
-            <button class="btn btn-outline-success me-1"  data-bs-toggle = "modal" data-bs-target = "#login_owner">Login as Owner</button>
-            <button class="btn btn-success" type="submit">
-              <a href = "/view_cart" class = "text-white">View Cart</a>
-              <span class = "badge badge-info">{{length}}</span>
-            </button>
+            <button class="btn btn-outline-success me-1" data-bs-toggle = "modal" data-bs-target = "#register_owner">Register</button>
+            <button class="btn btn-outline-success me-1"  data-bs-toggle = "modal" data-bs-target = "#login_owner">Login</button>
         </div>
       </div>
     </nav>
@@ -44,49 +36,27 @@
       {% endwith %}
     </div>
 
-    <br>
-    <br>
-    <br>
+    <!--Main buttons-->
 
-    <div class = "container">
-      <h2 class = "text-white bg-secondary text-center">Stores</h1>
-      <br>
-      <div class = "row">
-        {%for i in list_shops%}
-          <div class = "container col-sm rounded bg-light text-center">
-            <div class = "bg-light">
-              <h1>Store {{loop.index}}</h1>
-            </div>
-            <hr>
-            <h2>{{i['shop_name']}}</h2>
-            <h3>Contact: <br>{{i['contact']}}</h3>
-            <button name = "getStore" type = "submit" class = "btn btn-primary"><a href = "view_store/{{i['email']}}"><strong class = "text-white">Visit Store</strong></a></button>
-          </div>
-        {%endfor%}
-      </div>
+    <div class = "container bg-dark p-5 ">
+    <h1 class = "text-white text-center">Blogger</h1>
     </div>
     <br>
-    <div class = "container">
-      <h2 class = "text-white bg-secondary text-center">All Products</h1>
-        <div class = "row">
-        {%for i in list_products%}
-          <div class = "container col-sm rounded bg-light text-center">
-            <div class = "bg-light">
-              <h1>{{i['item_name']}}</h1>
-            </div>
-            <hr>
-            <h2>{{i['description']}}</h2>
-            <h3><strong>Unit Price:</strong> ${{i['price']}}</h3>
-            <h3><strong>Quantity:</strong> {{i['quantity']}}</h3>
-            <form method = "POST" class = "column">
-              <input name = "taken_count" placeholder = "Quantity">
-              <input type = "hidden" name = "item_id" value = "{{i['_id']}}">
-              <button type = "submit" name = "buy_item" class = "btn btn-success me-1"><strong class = "text-white">Add to cart</strong></button>
-            </form>
-          </div>
-        {%endfor%}
+    
+    {% for blog in blogs %}
+    <div class="container my-5">
+      <div class="card shadow-sm rounded-4 p-4">
+        <h1 class="mb-3">{{blog['title']}}</h1>
+        <p class="text-muted">By {{blog['user_name']}} · {{blog['time']}}</p>
+        <hr>
+        <p>
+          {{blog['content']}}
+        </p>
       </div>
     </div>
+    {%endfor%}
+      
+
 
     <!-- Register Modal -->
 
@@ -94,24 +64,20 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Register Here</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Register</h5>
           
             </div>
             <div class="modal-body">
               <form method = "POST">
-                <textarea name = "shop_name" class = "form-control" id = "contact_name" rows = "1" placeholder = "Name of the Shop"></textarea>
-                <br>
-                <textarea name = "owner_name" class = "form-control" id = "contact_name" rows = "1" placeholder = "Name""></textarea>
+                <textarea name = "fName" class = "form-control" id = "contact_name" rows = "1" placeholder = "Name"></textarea>
                 <br>
                 <textarea name = "email" class = "form-control" id = "contact_name" rows = "1" placeholder = "Email"></textarea>
-                <br>
-                <textarea name = "contact" class = "form-control" id = "contact_name" rows = "1" placeholder= "123-456-7890"></textarea>
                 <br>
                 <textarea name = "pw" class = "form-control" id = "contact_name" rows = "1" placeholder= "Password"></textarea>
                 <br>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button name = "register_owner" type = "submit" class = "btn btn-primary"><strong>Sign Up</strong></button>
+                  <button name = "sign_up" type = "submit" class = "btn btn-primary"><strong>Sign Up</strong></button>
                 </div>
               </form>
             </div>
